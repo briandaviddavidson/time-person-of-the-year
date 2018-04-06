@@ -1,0 +1,35 @@
+{
+  "name": "time-person-of-the-year",
+  "version": "1.0.0",
+  "description": "Time's Person of the Year",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/briandaviddavidson/time-person-of-the-year.git"
+  },
+  "keywords": [
+    "time",
+    "time",
+    "person",
+    "of",
+    "the",
+    "year",
+    "person",
+    "poty",
+    "year"
+  ],
+  "author": "Brian Davidson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/briandaviddavidson/time-person-of-the-year/issues"
+  },
+  "homepage": "https://github.com/briandaviddavidson/time-person-of-the-year#readme",
+  "dependencies": {
+    "d3": "^5.0.0",
+    "express": "^4.16.3"
+  }
+}
