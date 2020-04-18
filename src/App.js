@@ -1,23 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+let people = require('./data/people.json');
 
-function App() {
-  let people = require('./data/people.json')
-
-
-  return (
-    <div className="App">
-    <img src={logo} />
-    {people.map((person, index) => (
-        <div key={index}>
-          <h3>{person.name}</h3>
-          <p>{person.year}</p>
-          <p>{person.country}</p>
-        </div>
-      ))}
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (<div class="flex">
+    <img src={logo} alt="Time Magazine" />
+      <div className="users">
+        {
+          people.map((user, index) => (<div key={index}>
+            <h3>{user.name}</h3>
+            <p>{user.year}</p>
+            <p>{user.birth || "Various"}</p>
+          </div>))
+        }
+      </div>
+    </div>)
+  }
 }
 
 export default App;
