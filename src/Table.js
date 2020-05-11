@@ -34,8 +34,34 @@ const useSortableData = (people, config = null) => {
   return {people: sortedPeople, requestSort, sortConfig};
 };
 
+function buildUrl(name) {
+  let nameArr = name.split('(');
+  let val = nameArr.length > 1 ? nameArr[1].slice(0, -1) : nameArr[0] ;
+  let search = val.replace(' ', '_');
+  return `https://en.wikipedia.org/wiki/${search}`;
+}
+
+function calcAges(person) {
+  console.log(person)
+  if (!person.birth) {
+    person.awardAge = ''
+  } else {
+    person.awardAge = person.year-person.birth;
+  }
+
+  if (!person.death) {
+    person.deathAge = '';
+  } else {
+    person.deathAge = person.death-person.birth;
+  }
+
+  return person;
+}
+
 const Table = (props) => {
   const {people, requestSort, sortConfig} = useSortableData(props.people);
+  people.forEach(calcAges);
+
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -44,22 +70,42 @@ const Table = (props) => {
       ? sortConfig.direction
       : undefined;
   };
-  return (<table>
+  return (<table className="table">
     <thead>
       <tr>
         <th>
-          <button type="button" onClick={() => requestSort('name')} className={getClassNamesFor('name')}>
+          <button type="button" onClick={() => requestSort('name')} className={`button ${getClassNamesFor('name')}`}>
             Name
           </button>
         </th>
         <th>
-          <button type="button" onClick={() => requestSort('year')} className={getClassNamesFor('year')}>
+          <button type="button" onClick={() => requestSort('awardAge')} className={`button ${getClassNamesFor('awardAge')}`}>
+            Award Age
+          </button>
+        </th>
+        <th>
+          <button type="button" onClick={() => requestSort('deathAge')} className={`button ${getClassNamesFor('deathAge')}`}>
+            Death Age (if applicable)
+          </button>
+        </th>
+        <th>
+          <button type="button" onClick={() => requestSort('honor')} className={`button ${getClassNamesFor('honor')}`}>
+            Honor
+          </button>
+        </th>
+        <th>
+          <button type="button" onClick={() => requestSort('year')} className={`button ${getClassNamesFor('year')}`}>
             Year
           </button>
         </th>
         <th>
-          <button type="button" onClick={() => requestSort('birth')} className={getClassNamesFor('birth')}>
+          <button type="button" onClick={() => requestSort('birth')} className={`button ${getClassNamesFor('birth')}`}>
             Birth
+          </button>
+        </th>
+        <th>
+          <button type="button" onClick={() => requestSort('death')} className={`button ${getClassNamesFor('death')}`}>
+            Death
           </button>
         </th>
       </tr>
@@ -67,60 +113,19 @@ const Table = (props) => {
     <tbody>
       {
         people.map((person, index) => (<tr key={index}>
-          <td>{person.name}</td>
+          <td>
+            <a href={buildUrl(person.name)} rel="noopener noreferrer" target="_blank">{person.name}</a>
+          </td>
+          <td>{person.awardAge}</td>
+          <td>{person.deathAge}</td>
+          <td>{person.honor}</td>
           <td>{person.year}</td>
           <td>{person.birth}</td>
+          <td>{person.death}</td>
         </tr>))
       }
     </tbody>
   </table>);
 };
-
-//
-// buildUrl(name) {
-//   let nameArr = name.split('(');
-//   let val = nameArr.length > 1 ? nameArr[1].slice(0, -1) : nameArr[0] ;
-//   let search = val.replace(' ', '_');
-//   return `https://en.wikipedia.org/wiki/${search}`;
-// }
-//
-// setBirthAndDeath(birth, death) {
-//   if (!birth && !death) {
-//     return ''
-//   } else if (birth && !death) {
-//     return `Born in ${birth}`;
-//   } else {
-//     return `${birth}-${death}`;
-//   }
-// }
-//
-// calcAge(birth, year) {
-//   if (!birth) {
-//     return '';
-//   }
-//   let age = year-birth;
-//   return `at the age of ${age}`;
-// }
-//
-// render () {
-//   return (
-//     <div className="">
-//       {
-//         people.map((user, index) => (
-//           <div key={index}>
-//             <h3><a href={this.buildUrl(user.name)}>{user.name}</a></h3>
-//             <p>{user.honor} in {user.year} {this.calcAge(user.birth, user.year)}</p>
-//             <p>{user.country || "Various"}</p>
-//             <p>{this.setBirthAndDeath(user.birth, user.death)}</p>
-//             <p>Title: {user.title}</p>
-//             <p>Category: {user.category}</p>
-//             <p>Context: {user.context}</p>
-//           </div>
-//         ))
-//       }
-//     </div>
-//   )
-// }
-// }
 
 export default Table;
