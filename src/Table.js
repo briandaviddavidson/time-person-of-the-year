@@ -42,7 +42,6 @@ function buildUrl(name) {
 }
 
 function calcAges(person) {
-  console.log(person)
   if (!person.birth) {
     person.awardAge = ''
   } else {
