@@ -1174,5 +1174,27 @@
     "title": "Environmental activist",
     "category": "Environment",
     "context": "Environmental activist and founder of the school strike for the climate campaign."
+  },
+  {
+    "year": "2020",
+    "honor": "Person of the year",
+    "name": "Kamala Harris",
+    "country": "United States",
+    "birth": "1964",
+    "death": "",
+    "title": "Vice President Elect",
+    "category": "Politics",
+    "context": "First female Vice President of the United States"
+  },
+  {
+    "year": "2020",
+    "honor": "Person of the year",
+    "name": "Joe Biden",
+    "country": "United States",
+    "birth": "1942",
+    "death": "",
+    "title": "President Elect",
+    "category": "Politics",
+    "context": "President elect of the United States"
   }
 ]
