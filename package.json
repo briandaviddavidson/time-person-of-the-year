@@ -2,6 +2,9 @@
   "name": "time-person-of-the-year",
   "version": "0.1.0",
   "private": true,
+  "resolutions": {
+    "lodash": "4.17.21"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^12.1.5",
