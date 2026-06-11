@@ -1196,5 +1196,60 @@
     "title": "President Elect",
     "category": "Politics",
     "context": "President elect of the United States"
+  },
+  {
+    "year": "2021",
+    "honor": "Person of the year",
+    "name": "Elon Musk",
+    "country": "United States",
+    "birth": "1971",
+    "death": "",
+    "title": "CEO of Tesla and SpaceX",
+    "category": "Technology",
+    "context": "Electric vehicles, private spaceflight, and becoming the world's richest person"
+  },
+  {
+    "year": "2022",
+    "honor": "Person of the year",
+    "name": "Volodymyr Zelensky",
+    "country": "Ukraine",
+    "birth": "1978",
+    "death": "",
+    "title": "President of Ukraine",
+    "category": "War",
+    "context": "Zelensky and the spirit of Ukraine in resisting the Russian invasion"
+  },
+  {
+    "year": "2023",
+    "honor": "Person of the year",
+    "name": "Taylor Swift",
+    "country": "United States",
+    "birth": "1989",
+    "death": "",
+    "title": "Singer-songwriter",
+    "category": "Media",
+    "context": "The record-breaking Eras Tour and a year of cultural dominance"
+  },
+  {
+    "year": "2024",
+    "honor": "Person of the year",
+    "name": "Donald Trump",
+    "country": "United States",
+    "birth": "1946",
+    "death": "",
+    "title": "President-elect of the United States",
+    "category": "Politics",
+    "context": "Won a second, non-consecutive term as President"
+  },
+  {
+    "year": "2025",
+    "honor": "Persons of the year",
+    "name": "The Architects of AI",
+    "country": "",
+    "birth": "",
+    "death": "",
+    "title": "",
+    "category": "Technology",
+    "context": "The tech leaders behind the rise of artificial intelligence, including Sam Altman, Demis Hassabis, Jensen Huang and Elon Musk"
   }
 ]

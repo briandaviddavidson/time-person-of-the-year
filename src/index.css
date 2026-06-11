@@ -1,35 +1,317 @@
+/* ==========================================================================
+   TIME — Person of the Year · Design System
+   Style: Editorial / Data-Dense  ·  Type: Libre Bodoni + Public Sans
+   ========================================================================== */
+
+:root {
+  /* Brand & ink */
+  --time-red: #ed1c24;
+  --time-red-dark: #c20f16;
+  --ink: #18181b;
+  --ink-soft: #3f3f46;
+  --muted: #71717a;
+
+  /* Surfaces */
+  --paper: #fafafa;
+  --surface: #ffffff;
+  --row-alt: #f5f5f4;
+  --row-hover: #fdecec; /* faint red tint */
+  --border: #e4e4e7;
+  --border-strong: #d4d4d8;
+
+  /* Type */
+  --font-display: 'Libre Bodoni', 'Times New Roman', serif;
+  --font-body: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
+
+  /* Spacing rhythm (4 / 8) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  --radius: 10px;
+  --shadow-card: 0 1px 2px rgba(24, 24, 27, 0.04),
+    0 8px 24px rgba(24, 24, 27, 0.06);
+
+  --focus-ring: 0 0 0 3px rgba(237, 28, 36, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* screen-reader-only utility */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* signature TIME frame */
+  border-top: 8px solid var(--time-red);
+}
+
+/* --------------------------------------------------------------------------
+   Masthead
+   -------------------------------------------------------------------------- */
+
+.masthead {
+  text-align: center;
+  padding: var(--space-12) var(--space-4) var(--space-8);
+}
+
+.logo {
+  display: inline-block;
+  background-color: var(--time-red);
+  color: var(--surface);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 0.9;
+  font-size: clamp(48px, 11vw, 104px);
+  padding: 0.12em 0.22em 0.18em;
+  border-radius: 4px;
+}
+
+/* keep .extra working if referenced; folds into .logo brand mark */
+.extra {
+  font-family: var(--font-display);
+}
+
+.masthead__subtitle {
+  margin: var(--space-6) 0 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(15px, 2.4vw, 20px);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.masthead__rule {
+  width: 64px;
+  height: 3px;
+  background: var(--time-red);
+  border: 0;
+  margin: var(--space-4) auto var(--space-3);
+}
+
+.masthead__meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+
+.masthead__meta strong {
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   Table shell
+   -------------------------------------------------------------------------- */
+
+.table-wrap {
+  max-width: 1120px;
+  margin: 0 auto var(--space-12);
+  padding: 0 var(--space-4);
+}
+
+.table-scroll {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .table {
   width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 720px; /* preserves columns; scrolls on small screens */
+}
+
+/* Header */
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--ink);
+  padding: 0;
+  text-align: left;
+  white-space: nowrap;
 }
 
 .button {
-  background-color: #ed1c24;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  border: 0;
-  box-shadow: none;
-  border-radius: 5px;
-  padding: 7px;
-}
-
-.logo {
-  margin: 15px 0px 30px 15px;
-}
-
-.extra {
-  font-family: 'Times New Roman', serif;
-  color: #ed1c24;
-  font-size: 106px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   width: 100%;
+  background: transparent;
+  color: var(--surface);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 0;
+  cursor: pointer;
+  padding: var(--space-3) var(--space-4);
+  transition: background-color 180ms ease, color 180ms ease;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+.button:hover {
+  background: var(--time-red);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: inset var(--focus-ring);
+}
+
+/* sort caret */
+.sort-icon {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  opacity: 0.4;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.button.ascending .sort-icon,
+.button.descending .sort-icon {
+  opacity: 1;
+  color: #fff;
+}
+
+.button.descending .sort-icon {
+  transform: rotate(180deg);
+}
+
+/* Body cells */
+.table tbody td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border);
+  color: var(--ink-soft);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: var(--row-alt);
+}
+
+.table tbody tr {
+  transition: background-color 150ms ease;
+}
+
+.table tbody tr:hover {
+  background-color: var(--row-hover);
+}
+
+/* Numeric columns: right-aligned, tabular figures */
+.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.button.num {
+  justify-content: flex-end;
+}
+
+/* Name link */
+.table tbody td a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.table tbody td a:hover {
+  color: var(--time-red-dark);
+  border-bottom-color: var(--time-red);
+}
+
+.table tbody td a:focus-visible {
+  outline: none;
+  border-radius: 2px;
+  box-shadow: var(--focus-ring);
+}
+
+/* Honor as quiet badge */
+.honor {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--time-red-dark);
+  background: var(--row-hover);
+  border: 1px solid #f6c9cb;
+  border-radius: 999px;
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+
+/* empty numeric cell placeholder */
+.empty {
+  color: #d4d4d8;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .masthead {
+    padding: var(--space-8) var(--space-4) var(--space-6);
+  }
+  .table-wrap {
+    padding: 0 var(--space-2);
+  }
+  .button,
+  .table tbody td {
+    padding: var(--space-3);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Motion preferences
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
 }

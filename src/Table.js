@@ -57,74 +57,103 @@ function calcAges(person) {
   return person;
 }
 
+// Decorative caret; meaning is conveyed via aria-sort + label, not color/icon alone.
+const SortIcon = () => (
+  <svg
+    className="sort-icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="3"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M6 9l6 6 6-6" />
+  </svg>
+);
+
+// Numeric columns render empty values as an em dash placeholder.
+const NumCell = ({value}) => (
+  <td className="num">
+    {value === '' || value === undefined || value === null
+      ? <span className="empty" aria-hidden="true">—</span>
+      : value}
+  </td>
+);
+
+const COLUMNS = [
+  {key: 'name', label: 'Name', num: false},
+  {key: 'awardAge', label: 'Award Age', num: true},
+  {key: 'deathAge', label: 'Death Age', num: true},
+  {key: 'honor', label: 'Honor', num: false},
+  {key: 'year', label: 'Year', num: true},
+  {key: 'birth', label: 'Birth', num: true},
+  {key: 'death', label: 'Death', num: true},
+];
+
 const Table = (props) => {
-  const {people, requestSort, sortConfig} = useSortableData(props.people);
+  const {people, requestSort, sortConfig} = useSortableData(props.people, {
+    key: 'year',
+    direction: 'descending',
+  });
   people.forEach(calcAges);
 
-  const getClassNamesFor = (name) => {
-    if (!sortConfig) {
-      return;
-    }
-    return sortConfig.key === name
-      ? sortConfig.direction
-      : undefined;
+  const directionFor = (key) =>
+    sortConfig && sortConfig.key === key ? sortConfig.direction : undefined;
+
+  const ariaSortFor = (key) => {
+    const dir = directionFor(key);
+    if (dir === 'ascending') return 'ascending';
+    if (dir === 'descending') return 'descending';
+    return 'none';
   };
-  return (<table className="table">
-    <thead>
-      <tr>
-        <th>
-          <button type="button" onClick={() => requestSort('name')} className={`button ${getClassNamesFor('name')}`}>
-            Name
-          </button>
-        </th>
-        <th>
-          <button type="button" onClick={() => requestSort('awardAge')} className={`button ${getClassNamesFor('awardAge')}`}>
-            Award Age
-          </button>
-        </th>
-        <th>
-          <button type="button" onClick={() => requestSort('deathAge')} className={`button ${getClassNamesFor('deathAge')}`}>
-            Death Age (if applicable)
-          </button>
-        </th>
-        <th>
-          <button type="button" onClick={() => requestSort('honor')} className={`button ${getClassNamesFor('honor')}`}>
-            Honor
-          </button>
-        </th>
-        <th>
-          <button type="button" onClick={() => requestSort('year')} className={`button ${getClassNamesFor('year')}`}>
-            Year
-          </button>
-        </th>
-        <th>
-          <button type="button" onClick={() => requestSort('birth')} className={`button ${getClassNamesFor('birth')}`}>
-            Birth
-          </button>
-        </th>
-        <th>
-          <button type="button" onClick={() => requestSort('death')} className={`button ${getClassNamesFor('death')}`}>
-            Death
-          </button>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        people.map((person, index) => (<tr key={index}>
-          <td>
-            <a href={buildUrl(person.name)} rel="noopener noreferrer" target="_blank">{person.name}</a>
-          </td>
-          <td>{person.awardAge}</td>
-          <td>{person.deathAge}</td>
-          <td>{person.honor}</td>
-          <td>{person.year}</td>
-          <td>{person.birth}</td>
-          <td>{person.death}</td>
-        </tr>))
-      }
-    </tbody>
-  </table>);
+
+  return (
+    <div className="table-scroll" role="region" aria-label="TIME Person of the Year honorees" tabIndex="0">
+      <table className="table">
+        <caption className="visually-hidden">
+          Sortable table of every TIME Person of the Year. Activate a column header to sort.
+        </caption>
+        <thead>
+          <tr>
+            {COLUMNS.map((col) => (
+              <th key={col.key} scope="col" aria-sort={ariaSortFor(col.key)}>
+                <button
+                  type="button"
+                  onClick={() => requestSort(col.key)}
+                  className={`button ${col.num ? 'num' : ''} ${directionFor(col.key) || ''}`}
+                >
+                  {col.label}
+                  <SortIcon />
+                </button>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {people.map((person, index) => (
+            <tr key={index}>
+              <td>
+                <a href={buildUrl(person.name)} rel="noopener noreferrer" target="_blank">
+                  {person.name}
+                </a>
+              </td>
+              <NumCell value={person.awardAge} />
+              <NumCell value={person.deathAge} />
+              <td>
+                {person.honor ? <span className="honor">{person.honor}</span> : null}
+              </td>
+              <NumCell value={person.year} />
+              <NumCell value={person.birth} />
+              <NumCell value={person.death} />
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default Table;

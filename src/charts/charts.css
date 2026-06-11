@@ -1,0 +1,321 @@
+/* ==========================================================================
+   "Beyond the table" — D3 visualizations
+   Inherits design tokens from index.css (--ink, --time-red, --muted, etc.)
+   ========================================================================== */
+
+.viz-section {
+  max-width: 1120px;
+  margin: 0 auto var(--space-12);
+  padding: 0 var(--space-4);
+}
+
+.viz-section__head {
+  text-align: center;
+  margin: 0 0 var(--space-8);
+}
+
+.viz-section__head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 4.5vw, 40px);
+  margin: 0;
+  color: var(--ink);
+}
+
+.viz-section__head p {
+  margin: var(--space-2) auto 0;
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Card grid */
+.viz-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 900px) {
+  .viz-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .viz-card.span-2 {
+    grid-column: 1 / -1;
+  }
+}
+
+.viz-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.viz-card__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 19px;
+  margin: 0;
+  color: var(--ink);
+}
+
+/* Title doubles as the collapse toggle */
+.viz-card__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.viz-card__toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 4px;
+}
+
+.viz-card__toggle:hover .viz-card__chevron {
+  color: var(--ink-soft);
+}
+
+.viz-card__chevron {
+  flex: none;
+  color: var(--muted);
+  transition: transform 180ms ease;
+}
+
+.viz-card.is-collapsed .viz-card__chevron {
+  transform: rotate(-90deg);
+}
+
+.viz-card__body {
+  margin-top: var(--space-2);
+}
+
+.viz-card__sub {
+  margin: 0 0 var(--space-4);
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.viz-card__note {
+  margin: var(--space-3) 0 0;
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.viz-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Tooltip */
+.chart-tooltip {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 12px));
+  background: var(--ink);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 5;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  max-width: 260px;
+}
+
+.chart-tooltip strong {
+  font-weight: 600;
+}
+
+.chart-tooltip .muted {
+  opacity: 0.7;
+}
+
+/* Legend (shared) */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-4);
+  font-size: 12px;
+}
+
+.legend button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 0;
+  padding: 2px 4px;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font: inherit;
+  border-radius: 4px;
+  transition: opacity 150ms ease;
+}
+
+.legend button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.legend button[aria-pressed='false'] {
+  opacity: 0.35;
+}
+
+.legend .swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* Map layout */
+.map-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (min-width: 720px) {
+  .map-layout {
+    grid-template-columns: 1.9fr 1fr;
+  }
+}
+
+.map-aside__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 var(--space-3);
+}
+
+/* Map */
+.geo-country {
+  stroke: #fff;
+  stroke-width: 0.4;
+  transition: fill 150ms ease;
+  cursor: default;
+}
+
+.geo-country.has-data {
+  cursor: pointer;
+}
+
+.geo-country.has-data:hover {
+  fill: var(--time-red) !important;
+}
+
+.geo-graticule {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 0.3;
+}
+
+.geo-sea {
+  fill: #f4f6f8;
+}
+
+/* Map ranked list */
+.country-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  columns: 2;
+  column-gap: var(--space-6);
+}
+
+.country-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 3px 0;
+  break-inside: avoid;
+  color: var(--ink-soft);
+}
+
+.country-list .ct {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Axis text */
+.axis-label,
+.tick text {
+  fill: var(--muted);
+  font-size: 11px;
+}
+
+.tick line {
+  stroke: var(--border);
+}
+
+.axis-title {
+  fill: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.annotation {
+  fill: var(--time-red);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.annotation-line {
+  stroke: var(--time-red);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+/* Repeat-honorees strip */
+.repeat-name {
+  fill: var(--ink-soft);
+  font-size: 11px;
+}
+
+.repeat-span {
+  stroke: var(--time-red);
+  stroke-width: 1.5;
+  opacity: 0.3;
+}
+
+.repeat-dot {
+  fill: var(--time-red);
+  stroke: #fff;
+  stroke-width: 0.8;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .geo-country,
+  .legend button,
+  .viz-card__chevron {
+    transition: none;
+  }
+}
