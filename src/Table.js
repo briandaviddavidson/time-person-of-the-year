@@ -94,7 +94,10 @@ const COLUMNS = [
 ];
 
 const Table = (props) => {
-  const {people, requestSort, sortConfig} = useSortableData(props.people);
+  const {people, requestSort, sortConfig} = useSortableData(props.people, {
+    key: 'year',
+    direction: 'descending',
+  });
   people.forEach(calcAges);
 
   const directionFor = (key) =>
