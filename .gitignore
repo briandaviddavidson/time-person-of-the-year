@@ -1,1 +1,4 @@
 node_modules/*
+.gstack/
+build/
+.DS_Store
