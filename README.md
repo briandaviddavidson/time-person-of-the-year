@@ -69,6 +69,15 @@ The app reads `src/data/people.json`. Each entry looks like this:
 
 For the world map, a few historical country names are mapped to their modern equivalents (Soviet Union → Russia, West Germany → Germany). The map data comes from [`world-atlas`](https://github.com/topojson/world-atlas). Vatican City is too small to have a shape on that map, so it shows up only in the ranked country list. The mappings are in `COUNTRY_ALIASES` and `NO_POLYGON` in `src/charts/prepData.js`.
 
+## Built with Claude Code
+
+The first version of the app, from 2020, was a plain sortable table and was written by hand. In June 2026 the app got a major update made with [Claude Code](https://claude.com/claude-code). That update:
+
+- added the five D3 charts in `src/charts/` and the `prepData.js` module that builds their data from `people.json`
+- put each chart in a collapsible card whose title can be used with the keyboard and respects the reduced-motion setting
+- reworked the table (accessible sort controls, newest year first by default) and added tests for it
+- added the honorees from 2021 to 2025
+
 ## Tech stack
 
 - React 16
