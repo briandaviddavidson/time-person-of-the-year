@@ -2,3 +2,7 @@ node_modules/*
 .gstack/
 build/
 .DS_Store
+
+# firebase
+.firebase/
+firebase-debug.log

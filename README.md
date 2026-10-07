@@ -2,6 +2,8 @@
 
 A React app for browsing every TIME Person of the Year honoree from 1927 to 2025. It has a sortable table of all the honorees and a set of D3 charts built from the same data.
 
+**Live site:** https://time-person-of-the-year.web.app
+
 ## Features
 
 - **Sortable table**: every honoree with year, honor, name, country, title, category, context, age when honored, and age at death. Any column can be sorted. The default is Year, newest first. Each name links to the person's Wikipedia page.
@@ -24,6 +26,16 @@ yarn build      # production build in build/
 ```
 
 The project was bootstrapped with [Create React App](https://create-react-app.dev/) (`react-scripts` 5).
+
+## Deploying
+
+The app is hosted on Firebase Hosting in the `time-person-of-the-year` GCP project. The config is in `firebase.json` and `.firebaserc`.
+
+```sh
+npx firebase-tools login   # once
+yarn build
+npx firebase-tools deploy --only hosting
+```
 
 ## Project structure
 
