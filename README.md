@@ -2,6 +2,8 @@
 
 A React app for browsing every TIME Person of the Year honoree from 1927 to 2025. It has a sortable table of all the honorees and a set of D3 charts built from the same data.
 
+**Live site:** https://time.briandaviddavidson.com
+
 ## Features
 
 - **Sortable table**: every honoree with year, honor, name, country, title, category, context, age when honored, and age at death. Any column can be sorted. The default is Year, newest first. Each name links to the person's Wikipedia page.
@@ -22,6 +24,8 @@ yarn start      # dev server at http://localhost:3000
 yarn test       # Jest + React Testing Library, watch mode
 yarn build      # production build in build/
 ```
+
+Every push to `main` runs the tests, builds the app, and deploys it to GitHub Pages (`.github/workflows/deploy.yml`). The custom domain is set in `public/CNAME`.
 
 The project was bootstrapped with [Create React App](https://create-react-app.dev/) (`react-scripts` 5).
 
