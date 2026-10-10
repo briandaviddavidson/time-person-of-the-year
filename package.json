@@ -2,6 +2,7 @@
   "name": "time-person-of-the-year",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/time-person-of-the-year/",
   "resolutions": {
     "lodash": "4.17.21"
   },
