@@ -2,7 +2,7 @@
 
 A React app for browsing every TIME Person of the Year honoree from 1927 to 2025. It has a sortable table of all the honorees and a set of D3 charts built from the same data.
 
-**Live site:** https://time-person-of-the-year.web.app
+**Live site:** https://briandaviddavidson.com/time-person-of-the-year/
 
 ## Features
 
@@ -29,11 +29,13 @@ The project was bootstrapped with [Create React App](https://create-react-app.de
 
 ## Deploying
 
-The app is hosted on Firebase Hosting in the `time-person-of-the-year` GCP project. The config is in `firebase.json` and `.firebaserc`.
+The app is served from [briandaviddavidson.com/time-person-of-the-year/](https://briandaviddavidson.com/time-person-of-the-year/). `homepage` in `package.json` sets that base path for the build.
+
+It's deployed as part of the [personal website](https://github.com/briandaviddavidson/briandaviddavidson.com): that repo's build script clones this repo, runs `yarn build`, and publishes the output under `/time-person-of-the-year/`. To ship a change, merge it here, then run the deploy from the website repo.
+
+This repo's own Firebase Hosting site (`time-person-of-the-year` project; `firebase.json` and `.firebaserc`) only redirects old links from `time-person-of-the-year.web.app` and `time.briandaviddavidson.com` to the new path. It serves the empty `redirect/` folder:
 
 ```sh
-npx firebase-tools login   # once
-yarn build
 npx firebase-tools deploy --only hosting
 ```
 
