@@ -4,7 +4,7 @@
     "redirects": [
       {
         "regex": "^/(?P<path>.*)$",
-        "destination": "https://briandaviddavidson.com/time-person-of-the-year/:path",
+        "destination": "https://briandaviddavidson.com/time/:path",
         "type": 301
       }
     ]
